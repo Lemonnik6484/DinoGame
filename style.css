@@ -1,0 +1,91 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+#dino {
+    height: 50px;
+    width: 50px;
+    image-rendering: pixelated;
+    bottom: 22px;
+    left: -35vw;
+    position: relative;
+    transition: bottom 0.2s ease-in-out;
+    background-image: url("./dino.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50px 50px;
+    z-index: 100;
+    animation: dinoWalk 0.3s steps(2) infinite;
+}
+
+@keyframes dinoWalk {
+    0% {
+        background-image: url("./dino-step.png");
+    }
+    100% {
+        background-image: url("./dino-step2.png");
+    }
+}
+
+#dino.dead {
+    background-image: url("./dino-dead.png") !important;
+}
+
+.cactus {
+    width: 30px;
+    height: 50px;
+    background-image: url("./cactus.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px 50px;
+    z-index: 100;
+    position: absolute;
+    bottom: 22px;
+    animation: moveCactus 3.25s linear infinite;
+}
+
+@keyframes moveCactus {
+    from {
+        right: -30px;
+    }
+    to {
+        right: 100%;
+    }
+}
+
+#score {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-family: 'Tiny5', monospace;
+    color: #666666;
+    font-size: 30px;
+}
+
+#ground {
+    background-image: url("./ground.png");
+    image-rendering: pixelated;
+    background-size: 32px 22px;
+    position: absolute;
+    width: calc(100vw + 32px);
+    height: 22px;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    animation: moveGround 0.1s linear infinite;
+}
+
+@keyframes moveGround {
+    from {
+        left: 0px;
+    }
+    to {
+        left: -32px;
+    }
+}
