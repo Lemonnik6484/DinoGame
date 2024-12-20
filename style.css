@@ -1,3 +1,7 @@
+:root {
+    --speed: 3.5s;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -12,7 +16,7 @@ body {
     height: 50px;
     width: 50px;
     image-rendering: pixelated;
-    bottom: 22px;
+    bottom: 17px;
     left: -35vw;
     position: relative;
     background-image: url("./dino.png");
@@ -20,7 +24,7 @@ body {
     background-position: center;
     background-size: 50px 50px;
     z-index: 100;
-    animation: dinoWalk 0.3s steps(2) infinite;
+    animation: dinoWalk calc(var(--speed)/10) steps(2) infinite;
 }
 
 @keyframes dinoWalk {
@@ -36,6 +40,22 @@ body {
     background-image: url("./dino-dead.png") !important;
 }
 
+#dino.crouch {
+    animation: dinoCrouchWalk calc(var(--speed)/10) steps(2) infinite;
+    height: 26px;
+    width: 55px;
+    background-size: 55px 26px;
+}
+
+@keyframes dinoCrouchWalk {
+    0% {
+        background-image: url("./crouch1.png");
+    }
+    100% {
+        background-image: url("./crouch2.png");
+    }
+}
+
 .cactus {
     width: 30px;
     height: 50px;
@@ -45,8 +65,8 @@ body {
     background-size: 30px 50px;
     z-index: 100;
     position: absolute;
-    bottom: 22px;
-    animation: moveCactus 3.25s linear infinite;
+    bottom: 13px;
+    animation: moveCactus var(--speed) linear infinite;
     image-rendering: pixelated;
 }
 
@@ -72,14 +92,14 @@ body {
 #ground {
     background-image: url("./ground.png");
     image-rendering: pixelated;
-    background-size: 32px 22px;
+    background-size: 32px 18px;
     position: absolute;
-    width: calc(100vw + 32px);
-    height: 22px;
+    width: calc(100vw + 57px);
+    height: 18px;
     bottom: 0;
     left: 0;
     z-index: 30;
-    animation: moveGround 0.1s linear infinite;
+    animation: moveGround calc(var(--speed)/32.75) linear infinite;
 }
 
 @keyframes moveGround {
@@ -93,7 +113,7 @@ body {
 
 .cloud {
     position: absolute;
-    top: 20px;
+    top: 100px;
     animation: moveCloud linear infinite;
     background-image: url("./cloud.png");
     background-repeat: no-repeat;
@@ -113,15 +133,24 @@ body {
 .pterodactyl {
     width: 50px;
     height: 30px;
-    background-image: url("./pterodactyl.png");
+    background-image: url("./pterodactyl1.png");
     image-rendering: pixelated;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 50px 30px;
     z-index: 100;
     position: absolute;
-    bottom: 55px;
-    animation: movePter 3.25s linear infinite;
+    bottom: 75px;
+    animation: movePter var(--speed) linear infinite, pterFly calc(var(--speed)/7.5) steps(2) infinite;
+}
+
+@keyframes pterFly {
+    0% {
+        background-image: url("./pterodactyl1.png");
+    }
+    100% {
+        background-image: url("./pterodactyl2.png");
+    }
 }
 
 @keyframes movePter {

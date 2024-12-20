@@ -1,14 +1,16 @@
 const dino = document.getElementById('dino');
 const game = document.body;
 let scoreText = document.getElementById('score');
+let root = document.querySelector(':root');
 const gravity = 0.75;
 const jumpForce = 15;
-const groundLevel = 22;
-let dinoY = 22;
+const groundLevel = 13;
+let dinoY = 13;
 let isJumping = false;
 let velocity = 0;
 let cactusPositions = [];
 let score = 0;
+let speed = 3.5;
 
 function update() {
     velocity -= gravity;
@@ -26,15 +28,31 @@ function update() {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' && !isJumping) {
+    if ((e.code === 'Space' || e.code === 'ArrowUp') && !isJumping) {
         isJumping = true;
         velocity = jumpForce;
+    } else if (e.code === 'ArrowDown' && !isJumping) {
+        dino.classList.add('crouch');
+    } else if (e.code === 'ArrowDown' && isJumping) {
+        dino.classList.add('crouch');
+        velocity = jumpForce * -1;
+    }
+})
+
+document.addEventListener('keyup', (e) => {
+    if (e.code === 'Space' || e.code === 'ArrowUp') {
+        dino.classList.remove('crouch');
+    } else if (e.code === 'ArrowDown') {
+        dino.classList.remove('crouch');
     }
 })
 
 function updateScore() {
     score += 1;
     scoreText.innerText = `Score: ${score}`;
+
+    speed -= 0.000001;
+    root.style.setProperty('--speed', `${speed}s`);
 }
 
 setInterval(updateScore, 100);
@@ -66,7 +84,7 @@ function spawnCactus() {
     }, 50);
 
     const spawnNewCactus = () => {
-        const safeDistance = 1000;
+        const safeDistance = 1150;
         const canSpawn = cactusPositions.every(existingCactus => {
             const existingRect = existingCactus.getBoundingClientRect();
             return existingRect.right < window.innerWidth - safeDistance || existingRect.left > safeDistance;
@@ -89,10 +107,10 @@ function spawnCloud() {
 
     cloud.classList.add('cloud');
     cloud.style.width = `${size}px`;
-    cloud.style.height = `${size/2}px`;
-    cloud.style.top = `${Math.random() * 50}px`
+    cloud.style.height = `${size/3}px`;
+    cloud.style.top = `${Math.random() * 75}vh`
     cloud.style.animationDuration = `${speed}s`
-    cloud.style.backgroundSize = `${size}px ${size/2}px`;
+    cloud.style.backgroundSize = `${size}px ${size/3}px`;
     cloud.style.zIndex = `${size}`;
 
     game.appendChild(cloud);
@@ -139,3 +157,5 @@ setTimeout(() => {
     spawnPter();
 }, Math.random() * 25000 + 10000);
 update();
+isJumping = true;
+velocity = jumpForce;
