@@ -140,7 +140,7 @@ body {
     background-size: 50px 30px;
     z-index: 100;
     position: absolute;
-    bottom: 75px;
+    bottom: 55px;
     animation: movePter var(--speed) linear infinite, pterFly calc(var(--speed)/7.5) steps(2) infinite;
 }
 

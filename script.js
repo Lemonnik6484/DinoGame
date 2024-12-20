@@ -84,7 +84,7 @@ function spawnCactus() {
     }, 50);
 
     const spawnNewCactus = () => {
-        const safeDistance = 1150;
+        const safeDistance = 750;
         const canSpawn = cactusPositions.every(existingCactus => {
             const existingRect = existingCactus.getBoundingClientRect();
             return existingRect.right < window.innerWidth - safeDistance || existingRect.left > safeDistance;
@@ -134,7 +134,7 @@ function spawnPter () {
         const dinoRect = dino.getBoundingClientRect();
         const pterRect = pter.getBoundingClientRect();
 
-        if (dinoRect.right > pterRect.left && dinoRect.left < pterRect.right && dinoRect.bottom > pterRect.top) {
+        if (dinoRect.right > pterRect.left && dinoRect.left < pterRect.right && (dinoRect.top > pterRect.bottom && dinoRect.bottom < pterRect.bottom && dinoRect.bottom < pterRect.top)) {
             dino.classList.add('dead');
             clearInterval(pterInterval);
             alert("Game over!");
@@ -146,7 +146,7 @@ function spawnPter () {
             clearInterval(pterInterval);
             setTimeout(() => {
                 spawnPter()
-            }, Math.random() * 15000 + 750);
+            }, Math.random() * 15000 + 1500);
         }
     }, 50);
 }
