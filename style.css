@@ -15,7 +15,6 @@ body {
     bottom: 22px;
     left: -35vw;
     position: relative;
-    transition: bottom 0.2s ease-in-out;
     background-image: url("./dino.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -48,6 +47,7 @@ body {
     position: absolute;
     bottom: 22px;
     animation: moveCactus 3.25s linear infinite;
+    image-rendering: pixelated;
 }
 
 @keyframes moveCactus {
@@ -66,6 +66,7 @@ body {
     font-family: 'Tiny5', monospace;
     color: #666666;
     font-size: 30px;
+    z-index: 1000;
 }
 
 #ground {
@@ -87,5 +88,47 @@ body {
     }
     to {
         left: -32px;
+    }
+}
+
+.cloud {
+    position: absolute;
+    top: 20px;
+    animation: moveCloud linear infinite;
+    background-image: url("./cloud.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+@keyframes moveCloud {
+    from {
+        right: -200px;
+    }
+    to {
+        right: 100%;
+    }
+}
+
+.pterodactyl {
+    width: 50px;
+    height: 30px;
+    background-image: url("./pterodactyl.png");
+    image-rendering: pixelated;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50px 30px;
+    z-index: 100;
+    position: absolute;
+    bottom: 55px;
+    animation: movePter 3.25s linear infinite;
+}
+
+@keyframes movePter {
+    from {
+        right: -30px;
+    }
+    to {
+        right: 100%;
     }
 }
